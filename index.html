@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.js"></script>
+	<script src="js/controllers.js"></script>
+</head>
+
+<body ng-app="simpleApp" ng-controller="simpleCtrl" ng-cloak>
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Hello world! AngularJS validation and ng-messages example app</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p>Example form using model binding and ng-messages for validation and error messages.</p>
+				<p>This form uses required and ng-minlength.
+			</div>
+		</div>
+
+		<!-- html5 novalidate to disable html5 validation messages -->
+		<form name="exampleform" novalidate>
+
+			<div class="row">
+				<div class="col-md-2">
+					<label for="name" class="col-md-2 control-label">Name:</label>
+				</div>
+				<div class="col-md-5">
+					<input ng-model="formdata.name" name="name" type="text" class="form-control"
+						required ng-minlength="2">
+				</div>
+				<div class="col-md-5">
+					<!--
+						use ng-show with $touched to only show messages if user enters a value
+						ng-show="exampleform.name.$touched"
+
+						use $submitted if you only want to validate when the form is submitted,
+						otherwse validation runs on page load too
+
+					-->
+					<div ng-messages="exampleform.$submitted && exampleform.name.$error">
+						<span class="alert alert-danger" ng-message="required">Please enter a value for name.</span>
+						<span class="alert alert-danger" ng-message="minlength">Please enter at least 2 characters.</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-offset-2 col-md-10">
+					<button type="submit" class="btn btn-default" ng-click="hello()">Submit</button>
+				</div>
+			</div>
+
+		</form>
+
+		<div class="row" ng-show="hellomsg">
+			<div class="col-md-6">
+				<p>{{hellomsg}}</p>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>
