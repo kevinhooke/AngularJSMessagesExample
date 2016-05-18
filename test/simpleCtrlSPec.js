@@ -16,5 +16,14 @@ describe('Tests for simple controller', function () {
         expect($scope.hellomsg).toBe("Hello Test");
     });
 
+    it('Should return blank if param is blank', function () {
+        var $scope = {};
+        var controller = $controller('simpleCtrl', { $scope: $scope });
+
+        $scope.formdata.name = "";
+        $scope.hello();
+        expect($scope.hellomsg).toBe("");
+    });
+
 
 })
